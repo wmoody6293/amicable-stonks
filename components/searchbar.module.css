@@ -5,7 +5,8 @@
 .container {
   display: flex; /* makes this box a flexbox */
   max-width: 80%; /* makes this box take up 80% of display width */
-  border: 1px solid black; /* puts a border around the padding of the box */
+  /* border: 1px solid black; */
+  /* puts a border around the padding of the box */
   margin: auto; /* margin is outside of the border, auto means it centers vertically and horizontally */
   flex-direction: column; /* default flex direction is row, this will center all child elements vertically */
   height: 50rem;
