@@ -1,5 +1,5 @@
-import Searchbar from './searchbar.js';
-import Titlecard from './titlecard.js';
+import Searchbar from './searchbar';
+import Bookmarks from './bookmarks';
 
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react';
 
@@ -9,7 +9,6 @@ export default function Navtabs() {
 
   return (
     <>
-
       <Tabs align="center">
         <TabList>
           <Tab>Search!</Tab>
@@ -22,11 +21,11 @@ export default function Navtabs() {
           </TabPanel>
 
           <TabPanel>
-            <Titlecard />
+            <Bookmarks />
             {/* a gallery view of titlecards here */}
           </TabPanel>
         </TabPanels>
-        </Tabs>
+      </Tabs>
     </>
   );
 };
