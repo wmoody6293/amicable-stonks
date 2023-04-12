@@ -1,7 +1,7 @@
 import Navtabs from '../components/navtabs';
 
 setInterval(() => {
-  console.log('process.env.BONUS BEFORE', process.env.BONUS);
+  console.log('process.env.BONUS ALERT');
   process.env.BONUS ??= ('' + 0);
 
   const bonus = Number(process.env.BONUS);

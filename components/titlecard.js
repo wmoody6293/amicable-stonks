@@ -1,8 +1,4 @@
 
-// retrieve bookmarked obj from local storage
-// able to mark as watched (default false boolean)
-
-
 import {
   Card, CardHeader, CardBody, CardFooter,
   Heading, ButtonGroup, Button, Image, Input, IconButton
@@ -11,35 +7,8 @@ import { AddIcon, CheckIcon, CloseIcon } from '@chakra-ui/icons';
 
 import { useState, useRef, useEffect } from 'react';
 
-
-
 export default function Titlecard(props) {
   const { title, year, imdbID, poster, crossBtn, doneBtn, plusBtn } = props;
-
-  // function crossBtnHandler(e) {
-  //   e.preventDefault();
-
-  //   delete rapidSave[imdbID];
-  //   localStorage.setItem('rapidSave', JSON.stringify(rapidSave));
-
-
-
-  //   // const res = await fetch('api/storage', {
-  //   //   method: 'POST',
-  //   //   headers: { 'Content-Type': 'application/json' },
-  //   //   body: JSON.stringify({ poster, title, year })
-  //   // });
-  //   // const { results } = await res.json();
-
-  //   // results.forEach(({ Title, Year, imdbID, Poster}) => {
-  //   //   searchResults.push(<Titlecard
-  //   //     key={imdbID}
-  //   //     title={Title}
-  //   //     year={Year}
-  //   //     poster={Poster}
-  //   //   />);
-  //   // });
-  // }
 
   const [crossNow, setCrossBtn] = useState(crossBtn);
   const [doneNow, setDoneBtn] = useState(doneBtn);
@@ -57,33 +26,21 @@ export default function Titlecard(props) {
     } else if (doneNow === false) {
       setCrossBtn(true);
       setPlusBtn(true);
-      rapidSave[imdbID] = { title, year, poster,
+      rapidSave[imdbID] = { title, year, imdbID, poster,
         crossVal: crossNow, doneVal: doneNow, plusVal: plusNow };
 
       localStorage.setItem('rapidSave', JSON.stringify(rapidSave));
-    }
-    if (plusNow === false) {
+    } else if (plusNow === false) {
       // console.log('in titlecard plusNow');
       setCrossBtn(true);
       setDoneBtn(true);
       // setPlusBtn(false);
-      rapidSave[imdbID] = { title, year, poster,
+      rapidSave[imdbID] = { title, year, imdbID, poster,
         crossVal: crossNow, doneVal: doneNow, plusVal: plusNow };
 
       localStorage.setItem('rapidSave', JSON.stringify(rapidSave));
     }
   }, [crossNow, doneNow, plusNow]);
-
-  // function plusBtnHandler(e) {
-  //   e.preventDefault();
-
-  //   setCrossBtn(true);
-  //   setPlusBtn(false);
-  //   rapidSave[imdbID] = { title, year, poster,
-  //     crossVal: crossNow, doneVal: doneNow, plusVal: plusNow };
-
-  //   localStorage.setItem('rapidSave', JSON.stringify(rapidSave));
-  // }
 
   return (
     <>

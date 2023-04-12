@@ -21,16 +21,18 @@ export default function SearchBar() {
     const rapidSave = localStorage.getItem('rapidSave') ? JSON.parse(localStorage.getItem('rapidSave')) : {};
     const movieResults = function(arr) {
       return arr.map(({ Title, Year, imdbID, Poster }) => {
-        rapidSave[imdbID] ??= { Title, Year, imdbID, Poster,
-          crossBtn: false, doneBtn: true, plusBtn: true
-        };
+        if (rapidSave[imdbID] === undefined) {
+          rapidSave[imdbID] = { title: Title, year: Year, imdbID, poster: Poster,
+            crossBtn: false, doneBtn: true, plusBtn: true
+          };
+        }
+
         return rapidSave[imdbID];
       });
     };
 
     // modify this so it send an alert and stops
     if (Number(process.env.BONUS) <= 0) throw Error('TOO SOON');
-
     const enteredInput = searchInput.current.value;
 
     if (searched && enteredInput !== '') {
@@ -39,13 +41,13 @@ export default function SearchBar() {
           const res = await fetch(`api/rapid/${enteredInput}`);
           const { results } = await res.json();
 
-          setResults(movieResults(results).map(({ Title, Year, imdbID, Poster,
+          setResults(movieResults(results).map(({ title, year, imdbID, poster,
             crossBtn, doneBtn, plusBtn,
             crossVal, doneVal, plusVal
           }) => {
             console.log(imdbID);
             return <Titlecard
-              key={imdbID} title={Title} year={Year} imdbID={imdbID} poster={Poster}
+              key={imdbID} title={title} year={year} imdbID={imdbID} poster={poster}
               crossBtn={crossVal ?? crossBtn} doneBtn={doneVal ?? doneBtn} plusBtn={plusVal ?? plusBtn}
             />;
           }));
